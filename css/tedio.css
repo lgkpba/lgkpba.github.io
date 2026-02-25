@@ -1,0 +1,10 @@
+#jogo {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tabuleiro {
+    background-color: black;
+}
