@@ -1,6 +1,17 @@
 .cartao {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(240, 240, 240);
   width: 300px;
   padding: 10px;
+  border: 4px double;
   text-align: justify;
+}
+
+.cabecalho {
+  border: solid;
+  padding-left: 5px;
+}
+
+.conteudo {
+  border-style: none solid solid;
+  padding: 5px;
 }
