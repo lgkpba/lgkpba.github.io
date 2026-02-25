@@ -1,4 +1,6 @@
-.dia {
-  color: blue;
-  background-color: rgb(153, 153, 153);
+.cartao {
+  background-color: rgb(200, 200, 200);
+  width: 300px;
+  padding: 10px;
+  text-align: justify;
 }
