@@ -1,3 +1,8 @@
+body{
+
+    background-color: #000000;
+}
+
 #jogo {
 
     display: flex;
@@ -6,5 +11,5 @@
 }
 
 #tabuleiro {
-    background-color: #000000;
+    background-color: #FFFFFF;
 }
