@@ -22,7 +22,7 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-]
+];
 
 window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
@@ -36,10 +36,23 @@ window.onload = function() {
 function carregarImagens() {
 
     bloco = new Image();
-    bloco.src = "../sprites/bloco.png"
+    bloco.src = "../sprites/bloco.png";
 }
 
-class entidade {
+function carregarMapa() {
+
+    for (let i = 0; i < (linhas * colunas); i++) {
+        
+        const y = (Math.floor(i/colunas)) * tamanhoBloco;
+        const x = (i%colunas) * tamanhoBloco;
+
+        if (mapa[i] == 1) {
+            contexto.drawImage(bloco, x, y, tamanhoBloco, tamanhoBloco);
+        }
+    }
+}
+
+/*class Entidade {
 
     constructor(imagem, x, y, altura, largura) {
 
@@ -49,4 +62,4 @@ class entidade {
         this.altura = altura;
         this.largura = largura;
     }
-}
+}*/
