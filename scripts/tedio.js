@@ -14,7 +14,7 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,2,2,3,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -37,6 +37,8 @@ function carregarImagens() {
 
     bloco = new Image();
     bloco.src = "../sprites/bloco.png";
+    cabeca = new Image();
+    cabeca.src = "../sprites/cabecaCobra.png"
 }
 
 function carregarMapa() {
@@ -48,6 +50,10 @@ function carregarMapa() {
 
         if (mapa[i] == 1) {
             contexto.drawImage(bloco, x, y, tamanhoBloco, tamanhoBloco);
+        }
+        
+        else if (mapa[i] == 3) {
+            contexto.drawImage(cabeca, x, y, tamanhoBloco, tamanhoBloco);
         }
     }
 }
