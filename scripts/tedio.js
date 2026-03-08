@@ -22,6 +22,7 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
+comidas = [];
 
 window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
@@ -41,8 +42,12 @@ function carregarImagens() {
     cabeca.src = "../sprites/cabecaCobra.png";
     corpo = new Image();
     corpo.src = "../sprites/corpoCobra.png";
-    comida = new Image();
-    comida.src = "../sprites/comida.png";
+    maca = new Image();
+    maca.src = "../sprites/maca.png";
+    comidas[0] = maca; 
+    melancia = new Image();
+    melancia.src = "../sprites/melancia.png";
+    comidas[1] = melancia;
 }
 
 function gerarComida() {
@@ -76,7 +81,7 @@ function carregarMapa() {
         }
 
         else if (mapa[i] == 4) {
-            contexto.drawImage(comida, x, y, tamanhoBloco, tamanhoBloco);
+            contexto.drawImage(comidas[Math.floor(Math.random()*2)], x, y, tamanhoBloco, tamanhoBloco);
         }
     }
 }
