@@ -1,9 +1,17 @@
+#vitrine {
+
+    display: flex;
+    flex-direction: line;
+    align-items: top;
+}
+
 .cartao {
   background-color: #F0F0F0;
   width: 300px;
   padding: 10px;
   border: 4px double;
   text-align: justify;
+  margin-right: 10px;
 }
 
 .cabecalho {
