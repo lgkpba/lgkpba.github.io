@@ -1,3 +1,7 @@
+body {
+  text-align: center;
+}
+
 #vitrine {
     display: flex;
     flex-wrap: wrap;
