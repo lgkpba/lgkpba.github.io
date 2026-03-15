@@ -5,12 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>:)</title>
         <link rel="stylesheet" href="../css/tedio.css">
-        <script src="../scripts/snake.js"></script>
+        <script src="../scripts/cobrinha.js"></script>
         <script src="../scripts/tedio.js"></script>
     </head>
     <body>
         <div id="jogo">
-            <button id="comecar" onclick="carregarMapa(), setInterval(loopPrincipal, 150), document.addEventListener('keydown', mudarDirecao), desativarBotao()">Começar</button>
+            <button id="comecar" onclick="setInterval(loopPrincipal, 150), document.addEventListener('keydown', mudarDirecao), desativarBotao()">Começar</button>
             <br>
             <canvas id="tabuleiro"></canvas>
         </div>
