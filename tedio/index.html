@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="jogo">
-            <button id="comecar" onclick="carregarMapa()">Começar</button>
+            <button id="comecar" onclick="carregarMapa(), setInterval(gameLoop, 150), document.addEventListener('keydown', mudarDirecao);">Começar</button>
             <br>
             <canvas id="tabuleiro"></canvas>
         </div>

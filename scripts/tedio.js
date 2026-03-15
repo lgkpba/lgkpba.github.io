@@ -5,6 +5,7 @@ const tamanhoBloco = 32;
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
 let contexto;
+let direcao = 1;
 const mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -22,7 +23,8 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
-comidas = [];
+let snake = [126, 127, 128];
+let comidas = [];
 
 window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
@@ -35,20 +37,48 @@ window.onload = function() {
 }
 
 function carregarImagens() {
-
+    
     bloco = new Image();
-    bloco.src = "../sprites/bloco.png";
-    cabeca = new Image();
-    cabeca.src = "../sprites/cabecaCobra.png";
-    corpo = new Image();
-    corpo.src = "../sprites/corpoCobra.png";
-    cauda = new Image();
-    cauda.src = "../sprites/caudaCobra.png";
+    
+    cabecaDireita = new Image();
+    cabecaEsquerda = new Image();
+    cabecaCima = new Image();
+    cabecaBaixo = new Image ();
+    
+    corpoDireita = new Image();
+    corpoEsquerda = new Image();
+    corpoCima = new Image();
+    corpoBaixo = new Image();
+    
+    caudaDireita = new Image();
+    caudaEsquerda = new Image();
+    caudaCima = new Image();
+    caudaBaixo = new Image();
+    
     maca = new Image();
-    maca.src = "../sprites/maca.png";
-    comidas[0] = maca; 
     melancia = new Image();
+    
+    bloco.src = "../sprites/bloco.png";
+    
+    cabecaDireita.src = "../sprites/cabecaCobraDireita.png";
+    cabecaEsquerda.src = "../sprites/cabecaCobraEsquerda.png";
+    cabecaCima.src = "../sprites/cabecaCobraCima.png";
+    cabecaBaixo.src = "../sprites/cabecaCobraBaixo.png";
+    
+    corpoDireita.src = "../sprites/corpoCobraDireita.png";
+    corpoEsquerda.src = "../sprites/corpoCobraEsquerda.png";
+    corpoCima.src = "../sprites/corpoCobraCima.png";
+    corpoBaixo.src = "../sprites/corpoCobraBaixo.png";
+    
+    caudaDireita.src = "../sprites/caudaCobraDireita.png";
+    caudaEsquerda.src = "../sprites/caudaCobraEsquerda.png";
+    caudaCima.src = "../sprites/caudaCobraCima.png";
+    caudaBaixo.src = "../sprites/caudaCobraBaixo.png";
+    
+    maca.src = "../sprites/maca.png";
     melancia.src = "../sprites/melancia.png";
+
+    comidas[0] = maca; 
     comidas[1] = melancia;
 }
 
@@ -65,7 +95,7 @@ function gerarComida() {
 
 function carregarMapa() {
 
-    for (let i = 0; i < (linhas * colunas); i++) {
+    for (let i = 0; i < linhas * colunas; i++) {
         
         const y = (Math.floor(i/colunas)) * tamanhoBloco;
         const x = (i%colunas) * tamanhoBloco;
@@ -75,15 +105,48 @@ function carregarMapa() {
         }
         
         else if (mapa[i] == 2) {
-            contexto.drawImage(cauda, x, y, tamanhoBloco, tamanhoBloco);
+            if (direcao == 1) {
+                contexto.drawImage(caudaDireita, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -1) {
+                contexto.drawImage(caudaEsquerda, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -colunas) {
+                contexto.drawImage(caudaCima, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == colunas) {
+                contexto.drawImage(caudaBaixo, x, y, tamanhoBloco, tamanhoBloco);
+            }
         }
 
         else if (mapa[i] == 3) {
-            contexto.drawImage(corpo, x, y, tamanhoBloco, tamanhoBloco);
+            if (direcao == 1) {
+                contexto.drawImage(corpoDireita, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -1) {
+                contexto.drawImage(corpoEsquerda, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -colunas) {
+                contexto.drawImage(corpoCima, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == colunas) {
+                contexto.drawImage(corpoBaixo, x, y, tamanhoBloco, tamanhoBloco);
+            }
         }
 
         else if (mapa[i] == 4) {
-            contexto.drawImage(cabeca, x, y, tamanhoBloco, tamanhoBloco);
+            if (direcao == 1) {
+                contexto.drawImage(cabecaDireita, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -1) {
+                contexto.drawImage(cabecaEsquerda, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == -colunas) {
+                contexto.drawImage(cabecaCima, x, y, tamanhoBloco, tamanhoBloco);
+            }
+            else if (direcao == colunas) {
+                contexto.drawImage(cabecaBaixo, x, y, tamanhoBloco, tamanhoBloco);
+            }
         }
 
         else if (mapa[i] == 5) {
@@ -92,14 +155,57 @@ function carregarMapa() {
     }
 }
 
-/*class Entidade {
+function mudarDirecao(e) {
 
-    constructor(imagem, x, y, altura, largura) {
-
-        this.imagem = imagem;
-        this.x = x;
-        this.y = y;
-        this.altura = altura;
-        this.largura = largura;
+    if (e.key == "ArrowUp" && direcao != colunas) {
+        direcao = -colunas;
     }
-}*/
+    else if (e.key == "ArrowDown" && direcao != -colunas) {
+        direcao = colunas;
+    }
+    else if (e.key == "ArrowLeft" && direcao != 1) {
+        direcao = -1;
+    }
+    else if (e.key == "ArrowRight" && direcao != -1) {
+        direcao = 1;
+    }
+}
+
+function moverCobra() {
+
+    let novaCabeca = snake[snake.length - 1] + direcao;
+
+    snake.push(novaCabeca);
+    snake.shift();
+}
+
+function atualizarMapa() {
+
+    for (let i = 0; i < linhas * colunas; i++) {
+        if (mapa[i] == 2 || mapa[i] == 3 || mapa[i] == 4) {
+            mapa[i] = 0;
+        }
+    }
+
+    for (let i = 0; i < snake.length; i++) {
+
+        if (i == 0) {
+            mapa[snake[i]] = 2;
+        }
+        else if (i == snake.length - 1) {
+            mapa[snake[i]] = 4;
+        }
+        else {
+            mapa[snake[i]] = 3;
+        }
+    }
+}
+
+function gameLoop() {
+
+    moverCobra();
+    atualizarMapa();
+
+    contexto.clearRect(0, 0, larguraTabuleiro, alturaTabuleiro);
+    carregarMapa();
+}
