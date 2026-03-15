@@ -13,7 +13,7 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,2,2,3,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,2,3,4,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -42,6 +42,8 @@ function carregarImagens() {
     cabeca.src = "../sprites/cabecaCobra.png";
     corpo = new Image();
     corpo.src = "../sprites/corpoCobra.png";
+    cauda = new Image();
+    cauda.src = "../sprites/caudaCobra.png";
     maca = new Image();
     maca.src = "../sprites/maca.png";
     comidas[0] = maca; 
@@ -58,7 +60,7 @@ function gerarComida() {
         posComida = Math.floor(Math.random() * 256);
     }
 
-    mapa[posComida] = 4;
+    mapa[posComida] = 5;
 }
 
 function carregarMapa() {
@@ -73,14 +75,18 @@ function carregarMapa() {
         }
         
         else if (mapa[i] == 2) {
-            contexto.drawImage(corpo, x, y, tamanhoBloco, tamanhoBloco);
+            contexto.drawImage(cauda, x, y, tamanhoBloco, tamanhoBloco);
         }
 
         else if (mapa[i] == 3) {
-            contexto.drawImage(cabeca, x, y, tamanhoBloco, tamanhoBloco);
+            contexto.drawImage(corpo, x, y, tamanhoBloco, tamanhoBloco);
         }
 
         else if (mapa[i] == 4) {
+            contexto.drawImage(cabeca, x, y, tamanhoBloco, tamanhoBloco);
+        }
+
+        else if (mapa[i] == 5) {
             contexto.drawImage(comidas[Math.floor(Math.random()*2)], x, y, tamanhoBloco, tamanhoBloco);
         }
     }
