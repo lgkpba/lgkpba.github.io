@@ -1,11 +1,13 @@
 #vitrine {
-
     display: flex;
-    flex-direction: line;
-    align-items: top;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .cartao {
+  display: flex;
+  flex-direction: column;
   background-color: #F0F0F0;
   width: 300px;
   padding: 10px;
@@ -20,6 +22,7 @@
 }
 
 .conteudo {
+  flex: 1;
   border-style: none solid solid;
   padding: 5px;
 }
