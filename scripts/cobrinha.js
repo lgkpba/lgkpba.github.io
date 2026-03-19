@@ -4,6 +4,7 @@ const linhas = 15;
 const tamanhoBloco = 32;
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
+const angulo90 = Math.PI / 2;
 let contexto;
 let direcao = 1;
 const mapa = [
@@ -40,10 +41,7 @@ function carregarImagens() {
     
     bloco = new Image();
     
-    cabecaDireita = new Image();
-    cabecaEsquerda = new Image();
-    cabecaCima = new Image();
-    cabecaBaixo = new Image ();
+    cabeca = new Image();
     
     corpoDireita = new Image();
     corpoEsquerda = new Image();
@@ -60,10 +58,7 @@ function carregarImagens() {
     
     bloco.src = "../sprites/bloco.png";
     
-    cabecaDireita.src = "../sprites/cabecaCobraDireita.png";
-    cabecaEsquerda.src = "../sprites/cabecaCobraEsquerda.png";
-    cabecaCima.src = "../sprites/cabecaCobraCima.png";
-    cabecaBaixo.src = "../sprites/cabecaCobraBaixo.png";
+    cabeca.src = "../sprites/cabecaCobra.png";
     
     corpoDireita.src = "../sprites/corpoCobraDireita.png";
     corpoEsquerda.src = "../sprites/corpoCobraEsquerda.png";
@@ -135,18 +130,16 @@ function carregarMapa() {
         }
 
         else if (mapa[i] == 4) {
-            if (direcao == 1) {
-                contexto.drawImage(cabecaDireita, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -1) {
-                contexto.drawImage(cabecaEsquerda, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -colunas) {
-                contexto.drawImage(cabecaCima, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == colunas) {
-                contexto.drawImage(cabecaBaixo, x, y, tamanhoBloco, tamanhoBloco);
-            }
+            if (direcao == 1) rotacao = 0;
+            else if (direcao == -1) rotacao = angulo90 * 2;
+            else if (direcao == -colunas) rotacao = angulo90 * 3;
+            else if (direcao == colunas) rotacao = angulo90;
+
+            contexto.save();
+            contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
+            contexto.rotate(rotacao);
+            contexto.drawImage(cabeca, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
+            contexto.restore();
         }
 
         else if (mapa[i] == 5) {
