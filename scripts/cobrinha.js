@@ -4,7 +4,6 @@ const linhas = 15;
 const tamanhoBloco = 32;
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
-const angulo90 = Math.PI / 2;
 let contexto;
 let direcao = 1;
 const mapa = [
@@ -42,16 +41,8 @@ function carregarImagens() {
     bloco = new Image();
     
     cabeca = new Image();
-    
-    corpoDireita = new Image();
-    corpoEsquerda = new Image();
-    corpoCima = new Image();
-    corpoBaixo = new Image();
-    
-    caudaDireita = new Image();
-    caudaEsquerda = new Image();
-    caudaCima = new Image();
-    caudaBaixo = new Image();
+    corpo = new Image();
+    cauda = new Image();
     
     maca = new Image();
     melancia = new Image();
@@ -59,16 +50,8 @@ function carregarImagens() {
     bloco.src = "../sprites/bloco.png";
     
     cabeca.src = "../sprites/cabecaCobra.png";
-    
-    corpoDireita.src = "../sprites/corpoCobraDireita.png";
-    corpoEsquerda.src = "../sprites/corpoCobraEsquerda.png";
-    corpoCima.src = "../sprites/corpoCobraCima.png";
-    corpoBaixo.src = "../sprites/corpoCobraBaixo.png";
-    
-    caudaDireita.src = "../sprites/caudaCobraDireita.png";
-    caudaEsquerda.src = "../sprites/caudaCobraEsquerda.png";
-    caudaCima.src = "../sprites/caudaCobraCima.png";
-    caudaBaixo.src = "../sprites/caudaCobraBaixo.png";
+    corpo.src = "../sprites/corpoCobra.png";
+    cauda.src = "../sprites/caudaCobra.png";
     
     maca.src = "../sprites/maca.png";
     melancia.src = "../sprites/melancia.png";
@@ -94,47 +77,34 @@ function carregarMapa() {
         
         const y = (Math.floor(i/colunas)) * tamanhoBloco;
         const x = (i%colunas) * tamanhoBloco;
+        const angulo90 = Math.PI / 2;
+
+        if (direcao == 1) rotacao = 0;
+        else if (direcao == -1) rotacao = angulo90 * 2;
+        else if (direcao == -colunas) rotacao = angulo90 * 3;
+        else if (direcao == colunas) rotacao = angulo90;
 
         if (mapa[i] == 1) {
             contexto.drawImage(bloco, x, y, tamanhoBloco, tamanhoBloco);
         }
         
         else if (mapa[i] == 2) {
-            if (direcao == 1) {
-                contexto.drawImage(caudaDireita, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -1) {
-                contexto.drawImage(caudaEsquerda, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -colunas) {
-                contexto.drawImage(caudaCima, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == colunas) {
-                contexto.drawImage(caudaBaixo, x, y, tamanhoBloco, tamanhoBloco);
-            }
+            contexto.save();
+            contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
+            contexto.rotate(rotacao);
+            contexto.drawImage(cauda, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
+            contexto.restore();
         }
 
         else if (mapa[i] == 3) {
-            if (direcao == 1) {
-                contexto.drawImage(corpoDireita, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -1) {
-                contexto.drawImage(corpoEsquerda, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == -colunas) {
-                contexto.drawImage(corpoCima, x, y, tamanhoBloco, tamanhoBloco);
-            }
-            else if (direcao == colunas) {
-                contexto.drawImage(corpoBaixo, x, y, tamanhoBloco, tamanhoBloco);
-            }
+            contexto.save();
+            contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
+            contexto.rotate(rotacao);
+            contexto.drawImage(corpo, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
+            contexto.restore();
         }
 
         else if (mapa[i] == 4) {
-            if (direcao == 1) rotacao = 0;
-            else if (direcao == -1) rotacao = angulo90 * 2;
-            else if (direcao == -colunas) rotacao = angulo90 * 3;
-            else if (direcao == colunas) rotacao = angulo90;
-
             contexto.save();
             contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
             contexto.rotate(rotacao);
