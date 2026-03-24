@@ -25,6 +25,7 @@ const mapa = [
 ];
 let cobra = [126, 127, 128];
 let comidas = [];
+let comidaAtual = null;
 
 window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
@@ -71,6 +72,7 @@ function gerarComida() {
     }
 
     mapa[posComida] = 5;
+    comidaAtual = comidas[Math.floor(Math.random()*2)]
 }
 
 function carregarMapa() {
@@ -141,7 +143,7 @@ function carregarMapa() {
         }
 
         else if (mapa[i] == 5) {
-            contexto.drawImage(comidas[Math.floor(Math.random()*2)], x, y, tamanhoBloco, tamanhoBloco);
+            contexto.drawImage(comidaAtual, x, y, tamanhoBloco, tamanhoBloco);
         }
     }
 }
