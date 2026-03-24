@@ -1,12 +1,15 @@
 body {
+  background-color: #000000;
+  color: #FFFFFF;
   text-align: center;
 }
 
 #vitrine {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  color: #000000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .cartao {

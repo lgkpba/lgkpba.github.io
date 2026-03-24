@@ -72,15 +72,30 @@ function gerarComida() {
     }
 
     mapa[posComida] = 5;
-    comidaAtual = comidas[Math.floor(Math.random()*2)]
+    comidaAtual = comidas[Math.floor(Math.random()*2)];
 }
 
-function carregarMapa() {
+function desenharMapa() {
 
     for (let i = 0; i < linhas * colunas; i++) {
-        
         const y = (Math.floor(i/colunas)) * tamanhoBloco;
         const x = (i%colunas) * tamanhoBloco;
+        
+        if (mapa[i] == 1) {
+            contexto.drawImage(bloco, x, y, tamanhoBloco, tamanhoBloco);
+        }
+
+        else if (mapa[i] == 5) {
+            contexto.drawImage(comidaAtual, x, y, tamanhoBloco, tamanhoBloco);
+        }
+    }
+}
+
+function desenharCobra(){
+    
+    for (let i = 0; i < cobra.length; i++) {
+        const y = (Math.floor(cobra[i]/colunas)) * tamanhoBloco;
+        const x = (cobra[i]%colunas) * tamanhoBloco;
         const angulo90 = Math.PI / 2;
 
         if (direcao == 1) rotacao = 0;
@@ -88,21 +103,19 @@ function carregarMapa() {
         else if (direcao == -colunas) rotacao = angulo90 * 3;
         else if (direcao == colunas) rotacao = angulo90;
 
-        if (mapa[i] == 1) {
-            contexto.drawImage(bloco, x, y, tamanhoBloco, tamanhoBloco);
-        }
-        
-        else if (mapa[i] == 2) {
-            contexto.save();
-            contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
-            contexto.rotate(rotacao);
+        contexto.save();
+        contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
+        contexto.rotate(rotacao);
+
+        if (i == 0){
             contexto.drawImage(cauda, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
-            contexto.restore();
         }
-
-        else if (mapa[i] == 3) {
-
-            for(let j = 1; j < cobra.length - 1; j++){
+        else if (i == cobra.length - 1){
+            contexto.drawImage(cabeca, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
+        }
+        else{
+            contexto.drawImage(corpo, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
+            /*for(let j = 1; j < cobra.length - 1; j++){
                 let anterior = cobra[j-1];
                 let atual = cobra[j];
                 let proximo = cobra[j+1];
@@ -114,7 +127,6 @@ function carregarMapa() {
                     contexto.save();
                     contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
                     contexto.rotate(rotacao);
-                    contexto.drawImage(corpo, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
                     contexto.restore();
                 }
 
@@ -130,21 +142,10 @@ function carregarMapa() {
 
                     else if ((dir1 === 1 && dir2 === -colunas) || (dir1 === -colunas && dir2 === 1)) {
                     }
-                }
-            }
+                }*/
         }
 
-        else if (mapa[i] == 4) {
-            contexto.save();
-            contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
-            contexto.rotate(rotacao);
-            contexto.drawImage(cabeca, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
-            contexto.restore();
-        }
-
-        else if (mapa[i] == 5) {
-            contexto.drawImage(comidaAtual, x, y, tamanhoBloco, tamanhoBloco);
-        }
+        contexto.restore();
     }
 }
 
@@ -215,5 +216,6 @@ function loopPrincipal() {
     atualizarMapa();
 
     contexto.clearRect(0, 0, larguraTabuleiro, alturaTabuleiro);
-    carregarMapa();
+    desenharMapa();
+    desenharCobra();
 }
