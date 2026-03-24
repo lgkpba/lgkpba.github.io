@@ -162,12 +162,27 @@ function mudarDirecao(e) {
     }
 }
 
+function detectarColisao(novaCabeca) {
+    return mapa[novaCabeca] == 1 || cobra.includes(novaCabeca);
+}
+
 function moverCobra() {
 
     let novaCabeca = cobra[cobra.length - 1] + direcao;
 
-    cobra.push(novaCabeca);
-    cobra.shift();
+    if (detectarColisao(novaCabeca)) {
+
+        alert("Fim de Jogo!");
+        location.reload();
+    }
+
+    if (mapa[novaCabeca] == 5) {
+        cobra.push(novaCabeca);
+        gerarComida();
+    } else {
+        cobra.push(novaCabeca);
+        cobra.shift();
+    }
 }
 
 function atualizarMapa() {
