@@ -1,12 +1,14 @@
-let tabuleiro;
 const colunas = 17;
 const linhas = 15;
 const tamanhoBloco = 32;
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
+let tabuleiro;
 let contexto;
 let direcao = 1;
-const mapa = [
+let cobra = [126, 127, 128];
+let comidaAtual = null;
+let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -14,7 +16,7 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,2,3,4,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -23,9 +25,6 @@ const mapa = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
-let cobra = [126, 127, 128];
-let comidas = [];
-let comidaAtual = null;
 
 window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
@@ -58,9 +57,6 @@ function carregarImagens() {
     
     maca.src = "../sprites/maca.png";
     melancia.src = "../sprites/melancia.png";
-
-    comidas[0] = maca; 
-    comidas[1] = melancia;
 }
 
 function gerarComida() {
@@ -71,8 +67,15 @@ function gerarComida() {
         posComida = Math.floor(Math.random() * 256);
     }
 
+    let sorteio = Math.floor(Math.random()*2);
+    if (sorteio == 0) {
+        comidaAtual = maca;
+    }
+    else {
+        comidaAtual = melancia;
+    }
+
     mapa[posComida] = 5;
-    comidaAtual = comidas[Math.floor(Math.random()*2)];
 }
 
 function desenharMapa() {
@@ -174,9 +177,7 @@ function moverCobra() {
     let novaCabeca = cobra[cobra.length - 1] + direcao;
 
     if (detectarColisao(novaCabeca)) {
-
-        alert("Fim de Jogo!");
-        location.reload();
+        return true;
     }
 
     if (mapa[novaCabeca] == 5) {
@@ -212,7 +213,10 @@ function atualizarMapa() {
 
 function loopPrincipal() {
 
-    moverCobra();
+    if (moverCobra()) {
+        location.reload();
+        return;
+    }
     atualizarMapa();
 
     contexto.clearRect(0, 0, larguraTabuleiro, alturaTabuleiro);
