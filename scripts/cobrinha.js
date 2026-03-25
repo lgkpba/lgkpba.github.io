@@ -109,7 +109,7 @@ function desenharCobra(){
         contexto.save();
         contexto.translate(x + tamanhoBloco / 2, y + tamanhoBloco / 2);
         contexto.rotate(rotacao);
-
+        
         if (i == 0){
             contexto.drawImage(cauda, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
         }
@@ -118,7 +118,14 @@ function desenharCobra(){
         }
         else{
             if (cobra[i][1] != cobra[i+1][1]){
-                contexto.drawImage(canto, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco)
+                const atual = cobra[i][1];
+                const proximo = cobra[i+1][1];
+
+                if (proximo == atual * colunas || proximo == -(atual / colunas)) {
+                    contexto.scale(1, -1);
+                }
+
+                contexto.drawImage(canto, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
             }
             else {
                 contexto.drawImage(corpo, -tamanhoBloco / 2, -tamanhoBloco / 2, tamanhoBloco, tamanhoBloco);
@@ -163,6 +170,7 @@ function moverCobra() {
     } else {
         cobra.push([novaCabeca, direcao]);
         cobra.shift();
+        cobra[0][1] = cobra[1][1];
     }
 }
 
