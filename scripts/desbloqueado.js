@@ -12,7 +12,7 @@ function achaCookie(nome) {
 }
 
 window.onload = function() {
-    const validaco = getCookie("senha");
+    const validaco = achaCookie("senha");
     if (validacao != "true") {
         window.alert("Acesso Negado!");
         window.location.href = "https://lgkpba.github.io/";
