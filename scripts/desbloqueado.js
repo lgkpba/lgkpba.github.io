@@ -17,4 +17,8 @@ window.onload = function() {
         window.alert("Acesso Negado!");
         window.location.href = "https://lgkpba.github.io/";
     }
+    else {
+        var mostrar = document.getElementById("oculto");
+        mostrar.setAttribute("color", "#FFFFFF");
+    }
 }
