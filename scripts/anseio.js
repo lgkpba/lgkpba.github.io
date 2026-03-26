@@ -5,6 +5,7 @@ function verificaSenha(){
     texto.value = ""
 
     if (Number(tentativa).toString(2) == "10111010100001100011001"){
-        window.alert("Algum dia algo vai acontecer aqui")
+        document.cookie = "senha=true; path=/; Secure; SameSite=Strict";
+        window.location.href = "https://lgkpba.github.io/anseio/desbloqueado/";
     }
 }
