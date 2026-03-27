@@ -9,6 +9,7 @@ let direcao = 1;
 let cobra = [[126, 1], [127, 1], [128, 1]];
 let comidaAtual = null;
 let pontos = 0;
+let proximaDirecao = direcao;
 let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -140,16 +141,16 @@ function desenharCobra(){
 function mudarDirecao(e) {
 
     if (e.key == "ArrowUp" && direcao != colunas) {
-        direcao = -colunas;
+        proximaDirecao = -colunas;
     }
     else if (e.key == "ArrowDown" && direcao != -colunas) {
-        direcao = colunas;
+        proximaDirecao = colunas;
     }
     else if (e.key == "ArrowLeft" && direcao != 1) {
-        direcao = -1;
+        proximaDirecao = -1;
     }
     else if (e.key == "ArrowRight" && direcao != -1) {
-        direcao = 1;
+        proximaDirecao = 1;
     }
 }
 
@@ -158,7 +159,8 @@ function detectarColisao(novaCabeca) {
 }
 
 function moverCobra() {
-
+    
+    direcao = proximaDirecao;
     let novaCabeca = cobra[cobra.length - 1][0] + direcao;
 
     if (detectarColisao(novaCabeca)) {
