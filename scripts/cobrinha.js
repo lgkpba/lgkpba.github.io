@@ -8,6 +8,7 @@ let contexto;
 let direcao = 1;
 let cobra = [[126, 1], [127, 1], [128, 1]];
 let comidaAtual = null;
+let pontos = 0;
 let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -165,6 +166,14 @@ function moverCobra() {
     }
 
     if (mapa[novaCabeca] == 5) {
+        if (comidaAtual == maca) {
+            pontos += 10;
+            atualizarPontos();
+        }
+        else {
+            pontos += 30; //a melancia vale mais pontos pq sim :)
+            atualizarPontos();
+        }
         cobra.push([novaCabeca, direcao]);
         gerarComida();
     } else {
@@ -196,11 +205,18 @@ function atualizarMapa() {
     }
 }
 
+function atualizarPontos() {
+    pontuacao = document.getElementById("pontuacao");
+    pontuacao.textContent= "Pontos: " + Number(pontos).toString(); 
+}
+
 function loopPrincipal() {
 
     if (moverCobra()) {
         location.reload();
-        return;
+        if (pontos >= 300){
+            window.alert("A senha é a data da minha quinta-feira favorita.");
+        }
     }
     atualizarMapa();
 
