@@ -14,3 +14,7 @@ body{
 #tabuleiro {
     background-color: #FFFFFF;
 }
+
+#pontuacao {
+    font-size: 25px;
+}

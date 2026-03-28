@@ -19,6 +19,6 @@ window.onload = function() {
     }
     else {
         var mostrar = document.getElementById("oculto");
-        mostrar.style.color = "#FFFFFF"
+        mostrar.style.color = "#FFFFFF";
     }
 }
