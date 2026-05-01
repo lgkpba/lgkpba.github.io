@@ -14,11 +14,6 @@ a {
 
 #sobreposicao {
     position: fixed;
-    top: 5%;
-    left: 5%;
-    width: 50vw;
-    height: 50vh;
-    background-color: rgba(0, 0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +21,7 @@ a {
 }
 
 #sobreposto {
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     overflow-wrap: break-word;
     word-break: break-word;
