@@ -10,6 +10,7 @@ let cobra = [[126, 1], [127, 1], [128, 1]];
 let comidaAtual = null;
 let pontos = 0;
 let proximaDirecao = direcao;
+let filaDirecoes = [];
 let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -140,17 +141,17 @@ function desenharCobra(){
 
 function mudarDirecao(e) {
 
-    if (e.key == "ArrowUp" && direcao != colunas) {
-        proximaDirecao = -colunas;
-    }
-    else if (e.key == "ArrowDown" && direcao != -colunas) {
-        proximaDirecao = colunas;
-    }
-    else if (e.key == "ArrowLeft" && direcao != 1) {
-        proximaDirecao = -1;
-    }
-    else if (e.key == "ArrowRight" && direcao != -1) {
-        proximaDirecao = 1;
+    if (e.key == "ArrowUp") proximaDirecao = -colunas;
+    else if (e.key == "ArrowDown") proximaDirecao = colunas;
+    else if (e.key == "ArrowLeft") proximaDirecao = -1;
+    else if (e.key == "ArrowRight") proximaDirecao = 1;
+
+    if (proximaDirecao == null) return;
+
+    const ultima = filaDirecoes.length > 0 ? filaDirecoes[filaDirecoes.length - 1] : direcao;
+
+    if (proximaDirecao != ultima) {
+        filaDirecoes.push(proximaDirecao);
     }
 }
 
@@ -160,7 +161,9 @@ function detectarColisao(novaCabeca) {
 
 function moverCobra() {
     
-    direcao = proximaDirecao;
+    if (filaDirecoes.length > 0) {
+        direcao = filaDirecoes.shift();
+    }
     let novaCabeca = cobra[cobra.length - 1][0] + direcao;
 
     if (detectarColisao(novaCabeca)) {

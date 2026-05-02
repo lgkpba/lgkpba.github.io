@@ -11,3 +11,14 @@ nav {
 a {
     text-decoration: none;
 }
+
+#sobreposicao {
+    position: fixed;
+}
+
+#sobreposto {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
