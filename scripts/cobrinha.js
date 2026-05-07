@@ -1,8 +1,19 @@
+let larguraTela = window.innerWidth;
+let alturaTela = window.innerHeight;
+
+if (larguraTela >= alturaTela) {
+    alturaTela -= 10
+}
+else {
+    larguraTela -= 10
+}
+
 const colunas = 17;
 const linhas = 15;
-const tamanhoBloco = 32;
+const tamanhoBloco = Math.floor(Math.min(larguraTela / colunas, alturaTela / linhas, 32));
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
+
 let tabuleiro;
 let contexto;
 let direcao = 1;
@@ -141,10 +152,10 @@ function desenharCobra(){
 
 function mudarDirecao(e) {
 
-    if (e.key == "ArrowUp") proximaDirecao = -colunas;
-    else if (e.key == "ArrowDown") proximaDirecao = colunas;
-    else if (e.key == "ArrowLeft") proximaDirecao = -1;
-    else if (e.key == "ArrowRight") proximaDirecao = 1;
+    if (e.key == "ArrowUp" && direcao != colunas) proximaDirecao = -colunas;
+    else if (e.key == "ArrowDown" && direcao != -colunas) proximaDirecao = colunas;
+    else if (e.key == "ArrowLeft" && direcao != 1) proximaDirecao = -1;
+    else if (e.key == "ArrowRight" && direcao != -1) proximaDirecao = 1;
 
     if (proximaDirecao == null) return;
 
