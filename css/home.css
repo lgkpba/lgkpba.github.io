@@ -1,4 +1,4 @@
-body {
+html {
     background-color: #000000;
 }
 
@@ -8,6 +8,7 @@ nav {
 }
 
 a {
+    color: #FFFFFF;
     text-decoration: none;
 }
 
@@ -16,8 +17,9 @@ a {
 }
 
 #sobreposto {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 30px;
     overflow-wrap: break-word;
     word-break: break-word;
+    color: rgba(255, 255, 255, 0.01);
 }

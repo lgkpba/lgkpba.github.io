@@ -1,0 +1,13 @@
+html {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+ul { 
+    list-style-type: none;
+}
+
+a { 
+    color: #FFFFFF;
+    text-decoration: none;
+}
