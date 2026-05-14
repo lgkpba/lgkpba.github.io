@@ -10,7 +10,7 @@ else {
 
 const colunas = 17;
 const linhas = 15;
-const tamanhoBloco = Math.floor(Math.min(larguraTela / colunas, alturaTela / linhas, 32));
+const tamanhoBloco = Math.floor(Math.min(larguraTela / colunas, alturaTela / linhas, 40));
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
 
