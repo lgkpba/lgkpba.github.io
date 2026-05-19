@@ -44,6 +44,7 @@ window.onload = function() {
     tabuleiro = document.getElementById("tabuleiro");
     tabuleiro.height = alturaTabuleiro;
     tabuleiro.width = larguraTabuleiro;
+    
     contexto = tabuleiro.getContext("2d");
 
     carregarImagens();
@@ -152,10 +153,10 @@ function desenharCobra(){
 
 function mudarDirecao(e) {
 
-    if (e.key == "ArrowUp" && direcao != colunas) proximaDirecao = -colunas;
-    else if (e.key == "ArrowDown" && direcao != -colunas) proximaDirecao = colunas;
-    else if (e.key == "ArrowLeft" && direcao != 1) proximaDirecao = -1;
-    else if (e.key == "ArrowRight" && direcao != -1) proximaDirecao = 1;
+    if ((e.key == "ArrowUp" || e.key.toUpperCase() == "W") && direcao != colunas) proximaDirecao = -colunas;
+    else if ((e.key == "ArrowDown" || e.key.toUpperCase() == "S") && direcao != -colunas) proximaDirecao = colunas;
+    else if ((e.key == "ArrowLeft" || e.key.toUpperCase() == "A") && direcao != 1) proximaDirecao = -1;
+    else if ((e.key == "ArrowRight" || e.key.toUpperCase() == "D") && direcao != -1) proximaDirecao = 1;
 
     if (proximaDirecao == null) return;
 
