@@ -10,7 +10,7 @@
     </head>
     <body>
         <div id="jogo">
-            <button id="comecar" onclick="setInterval(loopPrincipal, 150), document.addEventListener('keydown', mudarDirecao), desativarBotao()">Começar</button>
+            <button id="comecar" onclick="setInterval(loopPrincipal, 150), document.addEventListener('keydown', mudarDirecao), document.addEventListener('pointerdown', (e) => {comecoX = e.clientX; comecoY = e.clientY; tempoComeco = performance.now()}), document.addEventListener('pointerup', (e) => {fimX = e.clientX; fimY = e.clientY; duracao = performance.now() - tempoComeco; calculaGesto(duracao);}), desativarBotao()">Começar</button>
             <br>
             <canvas id="tabuleiro"></canvas>
             <br>

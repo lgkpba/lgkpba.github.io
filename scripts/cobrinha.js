@@ -40,7 +40,15 @@ let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
 
+let comecoX;
+let comecoY;
+let fimX;
+let fimY;
+let tempoComeco;
+let duracao;
+
 window.onload = function() {
+    
     tabuleiro = document.getElementById("tabuleiro");
     tabuleiro.height = alturaTabuleiro;
     tabuleiro.width = larguraTabuleiro;
@@ -49,6 +57,14 @@ window.onload = function() {
 
     carregarImagens();
     gerarComida();
+}
+
+function calculaGesto(duracao) {
+    
+    const distanciaMinima = 50;
+    const tempoMaximo = 300;
+
+    if (duracao >= tempoMaximo) return;
 }
 
 function carregarImagens() {
