@@ -1,6 +1,11 @@
 html {
     background-color: #000000;
     color: #FFFFFF;
+    touch-action: none;
+}
+
+canvas {
+    touch-action: none;
 }
 
 #jogo {

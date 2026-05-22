@@ -1,8 +1,19 @@
+let larguraTela = window.innerWidth;
+let alturaTela = window.innerHeight;
+
+if (larguraTela >= alturaTela) {
+    alturaTela -= 10
+}
+else {
+    larguraTela -= 10
+}
+
 const colunas = 17;
 const linhas = 15;
-const tamanhoBloco = 32;
+const tamanhoBloco = Math.floor(Math.min(larguraTela / colunas, alturaTela / linhas, 40));
 const larguraTabuleiro = colunas * tamanhoBloco;
 const alturaTabuleiro = linhas * tamanhoBloco;
+
 let tabuleiro;
 let contexto;
 let direcao = 1;
@@ -29,14 +40,41 @@ let mapa = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
 
+let comecoX;
+let comecoY;
+let fimX;
+let fimY;
+let tempoComeco;
+let duracao;
+
 window.onload = function() {
+    
     tabuleiro = document.getElementById("tabuleiro");
     tabuleiro.height = alturaTabuleiro;
     tabuleiro.width = larguraTabuleiro;
+    
     contexto = tabuleiro.getContext("2d");
 
     carregarImagens();
     gerarComida();
+
+    return;
+}
+
+function calculaGesto(duracao) {
+    
+    const distanciaMinima = 50;
+    const tempoMaximo = 300;
+
+    const dx = fimX - comecoX;
+    const dy = fimY - comecoY;
+    const distancia = Math.sqrt((dx ** 2) + (dy ** 2));
+
+    if (duracao > tempoMaximo) return;
+    else if (distancia < distanciaMinima) return;
+
+    mudarDirecao(dx, dy);
+    return;
 }
 
 function carregarImagens() {
@@ -60,6 +98,8 @@ function carregarImagens() {
     
     maca.src = "../sprites/maca.png";
     melancia.src = "../sprites/melancia.png";
+
+    return;
 }
 
 function gerarComida() {
@@ -79,6 +119,8 @@ function gerarComida() {
     }
 
     mapa[posComida] = 5;
+
+    return;
 }
 
 function desenharMapa() {
@@ -95,6 +137,8 @@ function desenharMapa() {
             contexto.drawImage(comidaAtual, x, y, tamanhoBloco, tamanhoBloco);
         }
     }
+
+    return;
 }
 
 function desenharCobra(){
@@ -137,14 +181,38 @@ function desenharCobra(){
 
         contexto.restore();
     }
+
+    return;
 }
 
-function mudarDirecao(e) {
+function mudarDirecao(...args) {
 
-    if (e.key == "ArrowUp") proximaDirecao = -colunas;
-    else if (e.key == "ArrowDown") proximaDirecao = colunas;
-    else if (e.key == "ArrowLeft") proximaDirecao = -1;
-    else if (e.key == "ArrowRight") proximaDirecao = 1;
+    if (args.length == 1) {
+        
+        let e = args[0];
+
+        if ((e.key == "ArrowUp" || e.key.toUpperCase() == "W") && direcao != colunas) proximaDirecao = -colunas;
+        else if ((e.key == "ArrowDown" || e.key.toUpperCase() == "S") && direcao != -colunas) proximaDirecao = colunas;
+        else if ((e.key == "ArrowLeft" || e.key.toUpperCase() == "A") && direcao != 1) proximaDirecao = -1;
+        else if ((e.key == "ArrowRight" || e.key.toUpperCase() == "D") && direcao != -1) proximaDirecao = 1;
+
+    }
+
+    else if (args.length == 2) {
+        
+        let dx = args[0];
+        let dy = args[1];
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0 && direcao != -1) proximaDirecao = 1;
+            else if (dx < 0 && direcao != 1) proximaDirecao = -1;
+        }
+
+        else if (Math.abs(dx) < Math.abs(dy)) {
+            if (dy > 0 && direcao != -colunas) proximaDirecao = colunas;
+            else if (dy < 0 && direcao != colunas) proximaDirecao = -colunas;
+        }
+    }
 
     if (proximaDirecao == null) return;
 
@@ -153,6 +221,8 @@ function mudarDirecao(e) {
     if (proximaDirecao != ultima) {
         filaDirecoes.push(proximaDirecao);
     }
+
+    return;
 }
 
 function detectarColisao(novaCabeca) {
@@ -186,6 +256,8 @@ function moverCobra() {
         cobra.shift();
         cobra[0][1] = cobra[1][1];
     }
+
+    return false;
 }
 
 function atualizarMapa() {
@@ -208,11 +280,14 @@ function atualizarMapa() {
             mapa[cobra[i][0]] = 3;
         }
     }
+
+    return;
 }
 
 function atualizarPontos() {
     pontuacao = document.getElementById("pontuacao");
     pontuacao.textContent= "Pontos: " + Number(pontos).toString(); 
+    return;
 }
 
 function loopPrincipal() {
@@ -228,4 +303,6 @@ function loopPrincipal() {
     contexto.clearRect(0, 0, larguraTabuleiro, alturaTabuleiro);
     desenharMapa();
     desenharCobra();
+
+    return;
 }
