@@ -89,15 +89,15 @@ function carregarImagens() {
     maca = new Image();
     melancia = new Image();
     
-    bloco.src = "../sprites/bloco.png";
+    bloco.src = "sprites/bloco.png";
     
-    cabeca.src = "../sprites/cabecaCobra.png";
-    corpo.src = "../sprites/corpoCobra.png";
-    cauda.src = "../sprites/caudaCobra.png";
-    canto.src = "../sprites/cantoCobra.png";
+    cabeca.src = "sprites/cabecaCobra.png";
+    corpo.src = "sprites/corpoCobra.png";
+    cauda.src = "sprites/caudaCobra.png";
+    canto.src = "sprites/cantoCobra.png";
     
-    maca.src = "../sprites/maca.png";
-    melancia.src = "../sprites/melancia.png";
+    maca.src = "sprites/maca.png";
+    melancia.src = "sprites/melancia.png";
 
     return;
 }
@@ -292,12 +292,7 @@ function atualizarPontos() {
 
 function loopPrincipal() {
 
-    if (moverCobra()) {
-        location.reload();
-        if (pontos >= 300){
-            window.alert("A senha é a data da minha quinta-feira favorita.");
-        }
-    }
+    if (moverCobra()) location.reload();
     atualizarMapa();
 
     contexto.clearRect(0, 0, larguraTabuleiro, alturaTabuleiro);
