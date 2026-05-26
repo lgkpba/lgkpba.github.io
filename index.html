@@ -6,15 +6,19 @@
         <title>:)</title>
         <link rel="stylesheet" href="css/tedio.css">
         <script src="scripts/cobrinha.js"></script>
-        <script src="scripts/tedio.js"></script>
     </head>
     <body>
         <div id="jogo">
-            <button id="comecar" onclick="setInterval(loopPrincipal, 150), 
-            document.addEventListener('keydown', mudarDirecao), 
-            document.addEventListener('pointerdown', (e) => {comecoX = e.clientX; comecoY = e.clientY; tempoComeco = performance.now()}), 
-            document.addEventListener('pointerup', (e) => {fimX = e.clientX; fimY = e.clientY; duracao = performance.now() - tempoComeco; calculaGesto(duracao);}), 
-            desativarBotao()">Começar</button>
+            <div id="dificuldade">
+                <input type="radio" name="selec_dif" value="facil">
+                <label>Fácil</label>
+                <input type="radio" name="selec_dif" value="medio">
+                <label>Médio</label>
+                <input type="radio" name="selec_dif" value="dificil">
+                <label>Difícil</label>
+            </div>
+            <br>
+            <button id="comecar">JOGAR</button>
             <br>
             <canvas id="tabuleiro"></canvas>
             <br>

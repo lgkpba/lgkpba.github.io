@@ -58,7 +58,48 @@ window.onload = function() {
     carregarImagens();
     gerarComida();
 
+    document.getElementById("comecar").addEventListener("click", function () 
+    {
+        const dificuldade = document.querySelector('input[name="selec_dif"]:checked');
+
+        if (dificuldade) {
+
+            document.addEventListener('keydown', mudarDirecao), 
+            document.addEventListener('pointerdown', (e) => {comecoX = e.clientX; comecoY = e.clientY; tempoComeco = performance.now()}), 
+            document.addEventListener('pointerup', (e) => {fimX = e.clientX; fimY = e.clientY; duracao = performance.now() - tempoComeco; calculaGesto(duracao);})
+        
+            switch (dificuldade.value) {
+                
+                case ("facil"):
+                    setInterval(loopPrincipal, 200);
+                    break;
+                
+                case ("medio"):
+                    setInterval(loopPrincipal, 150);
+                    break;
+                
+                case ("dificil"):
+                    setInterval(loopPrincipal, 100);
+                    break;
+            }
+            
+            desativarBotao();
+        } 
+        
+        else {
+            alert("Escolha uma dificuldade");
+        }
+    });
+
     return;
+}
+
+function desativarBotao() {
+
+    var botao = document.getElementById("comecar");
+    botao.setAttribute("disabled", "true");
+    botao.style.backgroundColor = "#FF0000";
+    botao.style.color = "#FFFFFF";
 }
 
 function calculaGesto(duracao) {
