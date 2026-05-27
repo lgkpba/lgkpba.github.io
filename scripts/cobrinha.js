@@ -129,6 +129,7 @@ function carregarImagens() {
     
     maca = new Image();
     melancia = new Image();
+    uva = new Image();
     
     bloco.src = "sprites/bloco.png";
     
@@ -139,6 +140,7 @@ function carregarImagens() {
     
     maca.src = "sprites/maca.png";
     melancia.src = "sprites/melancia.png";
+    uva.src = "sprites/uva.png"
 
     return;
 }
@@ -151,12 +153,15 @@ function gerarComida() {
         posComida = Math.floor(Math.random() * 256);
     }
 
-    let sorteio = Math.floor(Math.random()*2);
+    let sorteio = Math.floor(Math.random()*3);
     if (sorteio == 0) {
         comidaAtual = maca;
     }
-    else {
+    else if (sorteio == 1){
         comidaAtual = melancia;
+    }
+    else {
+        comidaAtual = uva;
     }
 
     mapa[posComida] = 5;
@@ -287,7 +292,7 @@ function moverCobra() {
             atualizarPontos();
         }
         else {
-            pontos += 30; //a melancia vale mais pontos pq sim :)
+            pontos += 30; //a melancia e a uva valem mais pontos pq sim :)
             atualizarPontos();
         }
         cobra.push([novaCabeca, direcao]);
