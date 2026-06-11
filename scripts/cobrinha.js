@@ -46,7 +46,6 @@ let fimX;
 let fimY;
 let tempoComeco;
 let duracao;
-let cookies = document.cookie;
 
 window.onload = function() {
     
@@ -56,6 +55,17 @@ window.onload = function() {
     
     contexto = tabuleiro.getContext("2d");
 
+    if (document.cookie != "") {
+
+        const cookies = document.cookie.split(";")
+
+        for (let c of cookies) {
+            const [chave, valor] = c.split("=");
+            if (chave == "dificuldade") document.getElementById(valor).checked = true;
+        }
+
+    }
+
     carregarImagens();
     gerarComida();
 
@@ -64,7 +74,6 @@ window.onload = function() {
 
 function comecar() {
 
-    if
     const dificuldade = document.querySelector('input[name="selec_dif"]:checked');
 
     if (dificuldade) {
@@ -89,6 +98,7 @@ function comecar() {
         }
         
         desativarBotao();
+        document.cookie = "dificuldade=" + dificuldade.value + " path=/; Secure;";
     } 
     
     else {
