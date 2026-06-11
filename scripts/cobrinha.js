@@ -72,42 +72,40 @@ window.onload = function() {
     carregarImagens();
     gerarComida();
 
-    return;
-}
+    document.getElementById("comecar").addEventListener("click", function () 
+    {
+        const dificuldade = document.querySelector('input[name="selec_dif"]:checked');
 
-function comecar() {
+        if (dificuldade) {
 
-    const dificuldade = document.querySelector('input[name="selec_dif"]:checked');
-
-    if (dificuldade) {
-
-        document.addEventListener('keydown', mudarDirecao), 
-        document.addEventListener('pointerdown', (e) => {comecoX = e.clientX; comecoY = e.clientY; tempoComeco = performance.now()}), 
-        document.addEventListener('pointerup', (e) => {fimX = e.clientX; fimY = e.clientY; duracao = performance.now() - tempoComeco; calculaGesto(duracao);})
-    
-        switch (dificuldade.value) {
-            
-            case ("facil"):
-                setInterval(loopPrincipal, 200);
-                break;
-            
-            case ("medio"):
-                setInterval(loopPrincipal, 150);
-                break;
-            
-            case ("dificil"):
-                setInterval(loopPrincipal, 100);
-                break;
-        }
+            document.addEventListener('keydown', mudarDirecao), 
+            document.addEventListener('pointerdown', (e) => {comecoX = e.clientX; comecoY = e.clientY; tempoComeco = performance.now()}), 
+            document.addEventListener('pointerup', (e) => {fimX = e.clientX; fimY = e.clientY; duracao = performance.now() - tempoComeco; calculaGesto(duracao);})
         
-        desativarBotao();
-        document.cookie = "dificuldade=" + dificuldade.value + " path=/; Secure;";
-    } 
-    
-    else {
-        alert("Escolha uma dificuldade");
-    }
+            switch (dificuldade.value) {
+                
+                case ("facil"):
+                    setInterval(loopPrincipal, 200);
+                    break;
+                
+                case ("medio"):
+                    setInterval(loopPrincipal, 150);
+                    break;
+                
+                case ("dificil"):
+                    setInterval(loopPrincipal, 100);
+                    break;
+            }
+            
+            desativarBotao();
+        } 
+        
+        else {
+            alert("Escolha uma dificuldade");
+        }
+    });
 
+    return;
 }
 
 function desativarBotao() {
@@ -116,8 +114,6 @@ function desativarBotao() {
     botao.setAttribute("disabled", "true");
     botao.style.backgroundColor = "#FF0000";
     botao.style.color = "#FFFFFF";
-
-    return;
 }
 
 function calculaGesto(duracao) {
