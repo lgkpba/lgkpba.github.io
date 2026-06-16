@@ -62,8 +62,9 @@ window.onload = function() {
         for (let c of cookies) {
             const [chave, valor] = c.split("=");
             if (chave == "dificuldade") {
-                const marcador = 'input[value="' + valor + '"]'
-                document.querySelector(marcador).checked = true;
+                console.log('input[value="' + valor + '"]');
+                //const marcador = 'input[value="' + valor + '"]';
+                //document.querySelector(marcador).checked = true;
             }
         }
 
